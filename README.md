@@ -1,28 +1,37 @@
 # NEXUS-SCAN
-Python TCP Network Scanner
-# NEXUS-SCAN
 
-**NEXUS-SCAN**, Python kullanılarak geliştirilmiş basit bir TCP ağ tarama ve analiz aracıdır.
+### Python TCP Ağ Tarama ve Analiz Aracı
 
-Eğitim amacıyla geliştirilmiştir ve temel ağ programlama konularını öğrenmek için kullanılabilir.
+**NEXUS-SCAN**, Python kullanılarak geliştirilmiş, TCP bağlantıları üzerinden
+ağ üzerindeki portların durumunu kontrol etmeye yarayan basit bir ağ tarama
+ve analiz aracıdır.
+
+Bu proje özellikle **Python socket programlama, TCP bağlantıları, ağ
+programlama ve temel siber güvenlik konularını öğrenmek** amacıyla
+geliştirilmiştir.
 
 ---
 
 ## 🚀 Özellikler
 
+NEXUS-SCAN aşağıdaki temel özelliklere sahiptir:
+
 - TCP port taraması
-- Tek port taraması
+- Tek bir portu tarama
 - 1-65535 arasındaki portları tarama
-- Hedef IP'nin erişilebilirlik kontrolü
-- Port bağlantı durumunu gösterme
-- Tarih ve saat bilgisi
+- Hedef IP adresinin erişilebilirlik kontrolü
+- Açık ve kapalı portları gösterme
+- Port taraması sırasında tarih ve saat gösterme
 - Servis/banner bilgisi alma modu
 - Yardım menüsü
-- `exit` komutu ile güvenli çıkış
+- `exit` komutu ile programdan çıkış
+- Bağlantı zaman aşımı (`timeout`) kullanımı
 
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
+
+Proje Python'un standart kütüphaneleri kullanılarak geliştirilmiştir.
 
 - **Python 3**
 - `socket`
@@ -38,20 +47,3 @@ NEXUS-SCAN/
 │
 ├── porttarama1.py
 └── README.md
-
-## ⚠️ YASAL VE ETİK KULLANIM UYARISI
-
-NEXUS-SCAN yalnızca **eğitim, araştırma ve yetkili güvenlik
-testleri** amacıyla geliştirilmiştir.
-
-Bu araç ile:
-
-- Size ait olmayan sistemleri izinsiz taramayın.
-- Tarama yapmadan önce sistem sahibinden açık izin alın.
-- Aracı kötüye kullanmayın veya başkalarının sistemlerine zarar
-  vermek amacıyla kullanmayın.
-
-Programın izinsiz veya kötü amaçlı kullanımından doğabilecek
-sonuçlardan geliştirici sorumlu değildir.
-
-**Kullanım sorumluluğu tamamen kullanıcıya aittir.**
