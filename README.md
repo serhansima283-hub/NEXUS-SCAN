@@ -38,3 +38,20 @@ NEXUS-SCAN/
 │
 ├── porttarama1.py
 └── README.md
+
+## ⚠️ YASAL VE ETİK KULLANIM UYARISI
+
+NEXUS-SCAN yalnızca **eğitim, araştırma ve yetkili güvenlik
+testleri** amacıyla geliştirilmiştir.
+
+Bu araç ile:
+
+- Size ait olmayan sistemleri izinsiz taramayın.
+- Tarama yapmadan önce sistem sahibinden açık izin alın.
+- Aracı kötüye kullanmayın veya başkalarının sistemlerine zarar
+  vermek amacıyla kullanmayın.
+
+Programın izinsiz veya kötü amaçlı kullanımından doğabilecek
+sonuçlardan geliştirici sorumlu değildir.
+
+**Kullanım sorumluluğu tamamen kullanıcıya aittir.**
