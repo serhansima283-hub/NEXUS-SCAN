@@ -103,7 +103,7 @@ while True:
     else:
         port = int(port_girdisi)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
+        s.settimeout(0.3)
         baglanti = s.connect_ex((hedef, port))
 
         if baglanti == 0:
