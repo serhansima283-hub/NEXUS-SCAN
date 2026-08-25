@@ -41,18 +41,18 @@ while True:
     ╭────────────────────────────────────────────────────────╮
     │                    SİSTEM BİLGİSİ                      │
     │                                                        │
-    │  Sürüm       : 1.0.0                                   │
-    │  Motor       : Python Socket                           │
-    │  Protokol    : TCP / IPv4                              │
-    │  Durum       : ● HAZIR                                 │
+    │  Sürüm       : 1.0.0                                  │
+    │  Motor       : Python Socket                          │
+    │  Protokol    : TCP / IPv4                             │
+    │  Durum       : ● HAZIR                                │
     ╰────────────────────────────────────────────────────────╯
 
     ╭────────────────────────────────────────────────────────╮
     │                       KOMUTLAR                         │
     │                                                        │
-    │  [ -h ]       Yardım menüsü                            │
-    │  [ -vs ]      Servis / sürüm bilgisi                   │                     
-    │  [ exit ]     Programdan çıkış                         │
+    │  [ -h ]       Yardım menüsü                           │
+    │  [ -vs ]      Servis / sürüm bilgisi                  │
+    │  [ exit ]     Programdan çıkış                        │
     ╰────────────────────────────────────────────────────────╯
 
     ╭────────────────────────────────────────────────────────╮
@@ -103,9 +103,9 @@ while True:
 
             s.close()
 
-    print("\n========== TARAMA RAPORU ==========")
-    print(f"Açık port sayısı: {len(acik_portlar)}")
-    print(f"Açık portlar: {acik_portlar}")
+        print("\n========== TARAMA RAPORU ==========")
+        print(f"Açık port sayısı: {len(acik_portlar)}")
+        print(f"Açık portlar: {acik_portlar}")
 
     # Kullanıcı bir port numarası girdiyse
     else:
