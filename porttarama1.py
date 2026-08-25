@@ -82,7 +82,7 @@ while True:
     if port_girdisi == "":
         for port in range(1, 65536):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.settimeout(1)
+            s.settimeout(0.2)
             tarih = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             print(f"[{tarih}] {port} numaralı porta bağlanılıyor...")
             baglanti = s.connect_ex((hedef, port))
