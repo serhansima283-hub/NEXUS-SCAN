@@ -4,7 +4,7 @@ from datetime import datetime
 
 def ping(hedef):
     sonuc = subprocess.run(
-        ["ping", "-c", "1", "-W", "1", hedef],
+        ["ping", "-c", "1", "-W", "0.5", hedef],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL
     )
