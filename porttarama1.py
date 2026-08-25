@@ -67,6 +67,7 @@ while True:
                     NEXUS-SCAN  >  HAZIR
         """)
         continue
+
     if not ping(hedef):
         print("[-] Hedef aktif değil veya erişilemiyor.")
         continue
@@ -79,7 +80,8 @@ while True:
     )
 
     # Kullanıcı boş bıraktıysa
-    acik_portlar=[]
+    acik_portlar = []
+
     if port_girdisi == "":
         for port in range(1, 65536):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -99,7 +101,7 @@ while True:
                     except:
                         print("[-] Versiyon bilgisi alınamadı.")
 
-                s.close()
+            s.close()
 
     print("\n========== TARAMA RAPORU ==========")
     print(f"Açık port sayısı: {len(acik_portlar)}")
