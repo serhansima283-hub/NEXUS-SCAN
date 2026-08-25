@@ -41,18 +41,18 @@ while True:
     ╭────────────────────────────────────────────────────────╮
     │                    SİSTEM BİLGİSİ                      │
     │                                                        │
-    │  Sürüm       : 1.0.0                                  │
-    │  Motor       : Python Socket                          │
-    │  Protokol    : TCP / IPv4                             │
-    │  Durum       : ● HAZIR                                │
+    │  Sürüm       : 1.0.0                                   │
+    │  Motor       : Python Socket                           │
+    │  Protokol    : TCP / IPv4                              │
+    │  Durum       : ● HAZIR                                 │
     ╰────────────────────────────────────────────────────────╯
 
     ╭────────────────────────────────────────────────────────╮
     │                       KOMUTLAR                         │
     │                                                        │
-    │  [ -h ]       Yardım menüsü                           │
-    │  [ -vs ]      Servis / sürüm bilgisi                  │
-    │  [ exit ]     Programdan çıkış                        │
+    │  [ -h ]       Yardım menüsü                            │
+    │  [ -vs ]      Servis / sürüm bilgisi                   │
+    │  [ exit ]     Programdan çıkış                         │
     ╰────────────────────────────────────────────────────────╯
 
     ╭────────────────────────────────────────────────────────╮
