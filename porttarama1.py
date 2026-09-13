@@ -2,6 +2,7 @@ import socket
 import subprocess
 import platform
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def ping(hedef):
     parametre = "-n" if platform.system().lower() == "windows" else "-c"
@@ -14,6 +15,30 @@ def ping(hedef):
         stderr=subprocess.DEVNULL
     )
     return sonuc.returncode == 0
+
+def port_tara(hedef, port, versiyon_modu):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.3)  # Eşzamanlı tarama için ideal ve güvenli timeout
+        baglanti = s.connect_ex((hedef, port))
+        
+        if baglanti == 0:
+            servis_mesaji = ""
+            if versiyon_modu:
+                try:
+                    s.settimeout(0.5)
+                    bilgi = s.recv(1024)
+                    if bilgi:
+                        servis_mesaji = f" ── Servis: {bilgi.decode(errors='ignore').strip()}"
+                except:
+                    pass
+            s.close()
+            print(f"[+] Port {port}: Açık{servis_mesaji}")
+            return port
+        s.close()
+    except:
+        pass
+    return None
 
 versiyon_modu = False
 
@@ -42,35 +67,7 @@ while True:
             ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
                         N E X U S - S C A N
-                     AĞ TARAMA VE ANALİZ ARACI
-
-        ╭────────────────────────────────────────────────────────╮
-        │                    SİSTEM BİLGİSİ                      │
-        │                                                        │
-        │  Sürüm        : 1.0.1 (Stabil)                         │
-        │  Motor        : Python Socket                          │
-        │  Protokol     : TCP / IPv4                             │
-        │  Durum        : ● HAZIR                                │
-        ╰────────────────────────────────────────────────────────╯
-
-        ╭────────────────────────────────────────────────────────╮
-        │                        KOMUTLAR                        │
-        │                                                        │
-        │  [ -h ]       Yardım menüsü                            │
-        │  [ -vs ]      Servis / sürüm bilgisi                   │
-        │  [ exit ]     Programdan çıkış                         │
-        ╰────────────────────────────────────────────────────────╯
-
-        ╭────────────────────────────────────────────────────────╮
-        │                         TARAMA                         │
-        │                                                        │
-        │  Hedef IP     → Hedef IP adresini gir                  │
-        │  Port         → Port numarası gir                      │
-        │  Boş Port     → Tüm portları tara                      │
-        │  Timeout      → Varsayılan: 0.5 saniye                 │
-        ╰────────────────────────────────────────────────────────╯
-
-                    NEXUS-SCAN  >  HAZIR
+                     AĞ TARAMA VE ANALİZ ARACI (HIZLI MOD)
         """)
         continue
 
@@ -79,40 +76,26 @@ while True:
         print("[-] Hedef aktif değil veya erişilemiyor.")
         continue
     
-    print("[+] Hedef aktif. Tarama başlatılıyor...")
+    print("[+] Hedef aktif. Hızlı tarama başlatılıyor...")
 
-    port_girdisi = input("Taramak istediğiniz portu giriniz (Tümü için boş bırakın) >> ").strip()
+    port_girdisi = input("Taramak istediğiniz portu giriniz. Tüm portları taramak için boş geç >> ")
     acik_portlar = []
     baslangic_zamani = datetime.now()
 
     if port_girdisi == "":
-        print("[*] 1 - 65535 aralığındaki portlar taranıyor. Lütfen bekleyin...")
-        for port in range(1, 65536):
-            try:
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.settimeout(0.1) # Daha gerçekçi bir zaman aşımı
-                baglanti = s.connect_ex((hedef, port))
-
-                if baglanti == 0:
-                    print(f"[+] Port {port}: Açık")
-                    acik_portlar.append(port)
-
-                    if versiyon_modu:
-                        try:
-                            s.settimeout(1.0)
-                            bilgi = s.recv(1024)
-                            if bilgi:
-                                print(f"    └── Servis: {bilgi.decode(errors='ignore').strip()}")
-                        except:
-                            pass
-                s.close()
-            except KeyboardInterrupt:
-                print("\n[-] Tarama kullanıcı tarafından durduruldu.")
-                break
-            except Exception:
-                pass
+        print("[*] 1 - 65535 aralığı çoklu iş parçacığı (Threads) ile taranıyor...")
+        
+        # Aynı anda 200 bağlantı açarak hızı maksimuma çıkarıyoruz
+        with ThreadPoolExecutor(max_workers=200) as executor:
+            futures = {executor.submit(port_tara, hedef, port, versiyon_modu): port for port in range(1, 65536)}
+            
+            for future in as_completed(futures):
+                sonuc = future.result()
+                if sonuc:
+                    acik_portlar.append(sonuc)
 
         bitis_zamani = datetime.now()
+        acik_portlar.sort()
         print("\n========== TARAMA RAPORU ==========")
         print(f"Tarama Süresi   : {bitis_zamani - baslangic_zamani}")
         print(f"Açık port sayısı: {len(acik_portlar)}")
@@ -146,4 +129,4 @@ while True:
 
             s.close()
         except ValueError:
-            print("[-] Hatalı giriş! Lütfen geçerli bir sayı girin.")
+            print("[-] Hatalı giriş! Lütfen geçerli bir sayı girin veya tümü için boş bırakın.")
